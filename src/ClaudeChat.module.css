@@ -1,0 +1,189 @@
+/*
+ * Styles for <ClaudeChat />. All class names are scoped via CSS Modules so this
+ * cannot collide with your app's CSS. Colors read from CSS variables set inline
+ * on the root element — override via `accentColor` prop.
+ *
+ * Respects the OS light/dark preference via `prefers-color-scheme`.
+ */
+
+.launcher {
+  position: fixed;
+  bottom: 24px;
+  width: 56px;
+  height: 56px;
+  border: none;
+  border-radius: 50%;
+  background: var(--cc-accent);
+  color: #fff;
+  font-size: 26px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  z-index: 2147483000;
+  transition: transform 0.15s ease;
+  display: grid;
+  place-items: center;
+}
+.launcher:hover { transform: scale(1.06); }
+.launcher:focus-visible { outline: 3px solid var(--cc-accent); outline-offset: 3px; }
+.launcher[data-position='bottom-right'] { right: 24px; }
+.launcher[data-position='bottom-left'] { left: 24px; }
+
+.panelFloating {
+  position: fixed;
+  bottom: 92px;
+  width: 360px;
+  max-width: calc(100vw - 32px);
+  height: 520px;
+  max-height: calc(100vh - 120px);
+  z-index: 2147483000;
+}
+.panelFloating[data-position='bottom-right'] { right: 24px; }
+.panelFloating[data-position='bottom-left']  { left: 24px; }
+
+.panelInline {
+  width: 100%;
+  max-width: 480px;
+  height: 560px;
+}
+
+.panel {
+  background: var(--cc-bg);
+  color: var(--cc-fg);
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  border: 1px solid var(--cc-border);
+}
+
+.header {
+  background: var(--cc-accent);
+  color: #fff;
+  padding: 14px 16px;
+  font-weight: 600;
+  font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.closeBtn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 4px;
+}
+.closeBtn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
+.log {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.msg {
+  max-width: 82%;
+  padding: 9px 13px;
+  border-radius: 14px;
+  font-size: 14px;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+.msgUser {
+  align-self: flex-end;
+  background: var(--cc-accent);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+.msgBot {
+  align-self: flex-start;
+  background: var(--cc-bubble);
+  color: var(--cc-fg);
+  border-bottom-left-radius: 4px;
+}
+
+/* Typing dots for the empty streaming bubble */
+.typing { display: inline-flex; gap: 3px; }
+.typing i {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.4;
+  animation: cc-blink 1.2s infinite;
+}
+.typing i:nth-child(2) { animation-delay: 0.2s; }
+.typing i:nth-child(3) { animation-delay: 0.4s; }
+@keyframes cc-blink {
+  0%, 60%, 100% { opacity: 0.25; }
+  30% { opacity: 0.9; }
+}
+
+.form {
+  display: flex;
+  gap: 8px;
+  padding: 12px;
+  border-top: 1px solid var(--cc-border);
+}
+.input {
+  flex: 1;
+  border: 1px solid var(--cc-border);
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-size: 14px;
+  background: var(--cc-bg);
+  color: var(--cc-fg);
+  resize: none;
+  font-family: inherit;
+  max-height: 96px;
+}
+.input:focus-visible {
+  outline: 2px solid var(--cc-accent);
+  outline-offset: -1px;
+}
+.send {
+  border: none;
+  background: var(--cc-accent);
+  color: #fff;
+  border-radius: 10px;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.send:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.error {
+  align-self: center;
+  padding: 8px 12px;
+  background: rgba(229, 62, 62, 0.1);
+  border: 1px solid rgba(229, 62, 62, 0.4);
+  color: var(--cc-fg);
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+/* Screen-reader only helper for a11y announcements */
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
